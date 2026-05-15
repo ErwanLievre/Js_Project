@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BlazeRun – Platformer Adventure</title>
+
+  <!-- CSS – chargé dans l'ordre logique -->
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/buttons.css" />
+  <link rel="stylesheet" href="css/menu.css" />
+  <link rel="stylesheet" href="css/levelselect.css" />
+  <link rel="stylesheet" href="css/game.css" />
+  <link rel="stylesheet" href="css/screens.css" />
+  <link rel="stylesheet" href="css/leaderboard.css" />
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════════════════ MAIN MENU ══ -->
+  <div id="mainMenu" class="screen active">
+    <div class="menu-content">
+      <h1 class="game-title">BLAZE<span>RUN</span></h1>
+      <p class="subtitle">Platformer Adventure</p>
+      <div class="menu-divider"></div>
+      <button id="btnPlay" class="btn btn-primary">▶ Jouer</button>
+      <button id="btnLeaderboard" class="btn btn-secondary">🏆 Classement</button>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════ LEVEL SELECT ══ -->
+  <div id="levelSelect" class="screen">
+    <h2>CHOISIR UNE MAP</h2>
+
+    <div>
+      <p class="section-label">Monde</p>
+      <div id="mapCards"></div>
+    </div>
+
+    <div>
+      <p class="section-label">Difficulté</p>
+      <div class="diff-buttons">
+        <button class="diff-btn" data-diff="easy">😊 Facile</button>
+        <button class="diff-btn" data-diff="medium">😤 Difficile</button>
+        <button class="diff-btn" data-diff="hard">💀 Impossible</button>
+      </div>
+    </div>
+
+    <div class="level-actions">
+      <button id="btnStartGame" class="btn btn-primary">🚀 Lancer</button>
+      <button id="btnLevelBack" class="btn btn-secondary">← Retour</button>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════ GAMEPLAY ══ -->
+  <div id="gameScreen" class="screen">
+
+    <!-- HUD -->
+    <div id="hud">
+      <div class="hud-group">
+        <span id="hudLives">❤️❤️❤️</span>
+        <span id="hudScore">Score: 0</span>
+      </div>
+      <div class="hud-group">
+        <span id="hudKills">☠ 0</span>
+        <span id="hudTime">⏱ 0:00</span>
+        <span class="hud-hint">Q/A←  D/→  Z/Espace↑  S/↓=accroupi · ESC=pause</span>
+      </div>
+    </div>
+
+    <canvas id="gameCanvas" width="800" height="500"></canvas>
+
+    <!-- Pause overlay -->
+    <div id="pauseOverlay" class="hidden">
+      <h2>⏸ PAUSE</h2>
+      <button id="btnResume"    class="btn btn-primary">▶ Reprendre</button>
+      <button id="btnPauseQuit" class="btn btn-secondary">🚪 Menu principal</button>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════ GAME OVER ══ -->
+  <div id="gameOverScreen" class="screen">
+    <div class="end-title over">💀 GAME OVER</div>
+    <div class="stats-box">
+      <div class="stat-row">
+        <span class="stat-label">Score final</span>
+        <span class="stat-value" id="overScore">0</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-label">Temps joué</span>
+        <span class="stat-value" id="overTime">0:00</span>
+      </div>
+    </div>
+    <div class="end-actions">
+      <button id="btnRetry"   class="btn btn-primary">🔄 Réessayer</button>
+      <button id="btnOverQuit" class="btn btn-secondary">🚪 Menu</button>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════ WIN ══ -->
+  <div id="winScreen" class="screen">
+    <div class="end-title win">🏆 VICTOIRE !</div>
+    <div id="winRecord"></div>
+    <div class="stats-box">
+      <div class="stat-row">
+        <span class="stat-label">Score</span>
+        <span class="stat-value" id="winScore">0</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-label">Temps</span>
+        <span class="stat-value" id="winTime">0:00</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-label">Ennemis tués</span>
+        <span class="stat-value" id="winKills">0</span>
+      </div>
+    </div>
+    <div class="end-actions">
+      <button id="btnPlayAgain" class="btn btn-success">🔄 Rejouer</button>
+      <button id="btnWinQuit"   class="btn btn-secondary">🚪 Menu</button>
+    </div>
+    <!-- Popup campagne : continuer sur la map suivante ? -->
+    <div id="campaignContinue" class="hidden" style="margin-top:18px;padding:14px 20px;background:rgba(0,0,0,0.55);border-radius:12px;">
+      <p id="nextMapName" style="font-size:1.1em;font-weight:bold;margin-bottom:10px;">Continuer sur la prochaine map ?</p>
+      <div style="display:flex;gap:12px;justify-content:center;">
+        <button id="btnContinueNext"  class="btn btn-primary">✅ Oui, on continue !</button>
+        <button id="btnStopCampaign"  class="btn btn-secondary">❌ Non, retour au menu</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════ LEADERBOARD ══ -->
+  <div id="leaderboardScreen" class="screen">
+    <h2>🏆 MEILLEURS SCORES</h2>
+    <div id="lbContent"></div>
+    <button id="btnLbBack" class="btn btn-secondary">← Retour</button>
+  </div>
+
+  <!-- ══════════════ Scripts – ordre de dépendance strict ══════════ -->
+  <!-- Config globale -->
+  <script src="js/config.js"></script>
+
+  <!-- Utilitaires partagés -->
+  <script src="js/core/helpers.js"></script>
+  <script src="js/core/audio.js"></script>
+  <script src="js/core/particles.js"></script>
+
+  <!-- Entités (helpers d'abord car utilisés dans les classes) -->
+  <script src="js/entities/spike.js"></script>
+  <script src="js/entities/projectile.js"></script>
+  <script src="js/entities/platform.js"></script>
+  <script src="js/entities/trampoline.js"></script>
+  <script src="js/entities/teleporter.js"></script>
+  <script src="js/entities/enemy.js"></script>
+  <script src="js/entities/enemyDraw.js"></script>
+  <script src="js/entities/player.js"></script>
+  <script src="js/entities/powerup.js"></script>
+  <script src="js/entities/checkpoint.js"></script>
+  <script src="js/entities/endflag.js"></script>
+
+  <!-- Logique de jeu (game.js en premier car updater/renderer étendent son prototype) -->
+  <script src="js/game/levels.js"></script>
+  <script src="js/game/generator.js"></script>
+  <script src="js/game/game.js"></script>
+  <script src="js/game/updater.js"></script>
+  <script src="js/game/collisions.js"></script>
+  <script src="js/game/renderer.js"></script>
+
+  <!-- Interface utilisateur -->
+  <script src="js/ui/hud.js"></script>
+  <script src="js/ui/leaderboard.js"></script>
+  <script src="js/ui/menu.js"></script>
+
+  <!-- Point d'entrée -->
+  <script src="js/main.js"></script>
+</body>
+</html>
