@@ -1,0 +1,14 @@
+# Documents personnels / sensibles
+CLAUDE.md
+*.pdf
+*.docx
+
+# Éditeurs
+.vscode/
+.idea/
+*.swp
+*~
+
+# OS
+.DS_Store
+Thumbs.db
