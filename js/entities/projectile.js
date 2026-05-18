@@ -1,4 +1,4 @@
-// Projectile – tir horizontal (ennemis/joueur) ou bombe tombante (oiseaux)
+// Projectile venant de tir horizontal (ennemis/joueur) ou bombe tombante (oiseaux)
 
 class Projectile {
   constructor(x, y, dir, isEnemy, isBomb = false) {

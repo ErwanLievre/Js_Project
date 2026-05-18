@@ -20,7 +20,7 @@ class Player {
   }
 
   update(keys, platforms, isIce, isLava = false, gravityMult = 1) {
-    // ── Crouch ───────────────────────────────────────────────────────
+    // Crouch
     if (keys.crouch && !this.crouching) {
       this.crouching = true;
       this.h = this.crouchH;
@@ -30,7 +30,7 @@ class Player {
       this._tryUncrouch(platforms);
     }
 
-    // ── Horizontal movement ──────────────────────────────────────────
+    // Horizontal movement 
     const maxSpd  = isLava ? CONFIG.PLAYER_SPEED * 0.45 : CONFIG.PLAYER_SPEED;
     const friction = isIce ? 0.97 : 0.8;
 
@@ -38,28 +38,28 @@ class Player {
     else if (keys.right) { this.vx = Math.min(this.vx + 0.9,  maxSpd); this.facing =  1; }
     else                 { this.vx *= friction; if (Math.abs(this.vx) < 0.1) this.vx = 0; }
 
-    // ── Jump ─────────────────────────────────────────────────────────
+    // Jump 
     if (keys.jump && this.onGround && !this.crouching) {
       this.vy = CONFIG.JUMP_FORCE * gravityMult;
       this.onGround = false;
     }
 
-    // ── Gravity ──────────────────────────────────────────────────────
+    // Gravity 
     this.vy += CONFIG.GRAVITY * gravityMult;
     // Terminal velocity (clamped in the direction of gravity)
     if (gravityMult === 1)  this.vy = Math.min(this.vy,  20);
     else                    this.vy = Math.max(this.vy, -20);
 
-    // ── Move X → resolve X ──────────────────────────────────────────
+    // Move X → resolve X 
     this.x += this.vx;
     for (const pl of platforms) this._resolveX(pl);
 
-    // ── Move Y → resolve Y ──────────────────────────────────────────
+    // Move Y → resolve Y 
     this.onGround = false;
     this.y += this.vy;
     for (const pl of platforms) this._resolveY(pl, gravityMult);
 
-    // ── Animation ────────────────────────────────────────────────────
+    // Animation 
     this.animTimer++;
     if (this.onGround && Math.abs(this.vx) > 0.5) {
       if (this.animTimer % 7 === 0) this.animFrame = (this.animFrame + 1) % 4;
@@ -67,7 +67,7 @@ class Player {
       this.animFrame = this.vy * gravityMult < 0 ? 2 : 3;
     }
 
-    // ── Timers ───────────────────────────────────────────────────────
+    // Timers
     if (this.invincible && --this.invTimer  <= 0) this.invincible = false;
     if (this.starPower   && --this.starTimer <= 0) { this.starPower = false; this.invincible = false; }
   }

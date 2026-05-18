@@ -25,7 +25,7 @@ class Enemy {
       case "big":
         this.w = 50; this.h = 50; this.hp = 2; this.vx = diff.enemySpeed * 0.65; break;
       case "bird":
-        // Oiseau volant – largue des bombes
+        // Oiseau volant – largue des bombes (beug il se print tout le temps mais au moins ça, ça fonctionne)
         this.w = 40; this.h = 28; this.hp = 1; this.vx = diff.enemySpeed * 0.9;
         this.shootTimer    = Math.floor(Math.random() * 90);
         this.shootCooldown = 95;

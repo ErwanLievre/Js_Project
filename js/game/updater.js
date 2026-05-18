@@ -3,7 +3,6 @@ Game.prototype._update = function() {
   const H  = CONFIG.CANVAS_HEIGHT;
   const gm = this.gravityMult;
 
-  // Porte le joueur avec les plateformes mobiles (doit se faire AVANT le mouvement)
   const _ridden = this._findRiddenPlatform();
   this.platforms.forEach(pl  => pl.update());
   this.trampolines.forEach(tr => tr.update());
@@ -11,15 +10,14 @@ Game.prototype._update = function() {
   if (_ridden) { p.x += _ridden.dx; p.y += _ridden.dy; }
 
   const isIce = this._playerOnIce();
-  // Lave : ralentit seulement si le joueur touche presque le sol (< 55px du bas)
-  // Pas d'effet sur les plateformes en hauteur (plus de "tout lent")
+  // Lave : ralentit seulement si le joueur touche presque le sol (inférieur à 55px du bas)
   const isLava = this.map.theme === "lava" && p.y + p.h > H - 55 && this.gravityMult === 1;
 
   p.update(this.keys, this.platforms, isIce, isLava, gm);
 
   if (p.x < 0) { p.x = 0; p.vx = 0; }
 
-  // Caméra : en phase2 on scrolle vers la gauche
+  // Caméra en phase2 on scrolle vers la gauche
   const camTarget = this.map.theme === "phase2"
     ? p.x - CONFIG.CANVAS_WIDTH * 0.65
     : p.x - CONFIG.CANVAS_WIDTH / 3;
@@ -51,7 +49,7 @@ Game.prototype._findRiddenPlatform = function() {
   const gm = this.gravityMult;
   for (const pl of this.platforms) {
     if (pl.type !== "moving") continue;
-    const feetY = gm === 1 ? p.y + p.h : p.y; // pied en bas (normal) ou en haut (inversé)
+    const feetY = gm === 1 ? p.y + p.h : p.y; // pied en bas (normal) ou en haut (dans le cas de la gravité inversée)
     const platTop = gm === 1 ? pl.y : pl.y + pl.h;
     if (Math.abs(feetY - platTop) <= 4 && p.x + p.w > pl.x && p.x < pl.x + pl.w) {
       return pl;
@@ -103,7 +101,7 @@ Game.prototype._checkWin = function() {
   const fl = this.endFlag;
 
   if (this.map.theme === "phase2") {
-    // Phase 2 : gagner en atteignant le côté gauche
+    // Phase 2 gagner en atteignant le côté gauche
     if (this.player.x < 150) this._triggerWin();
     return;
   }
@@ -111,7 +109,7 @@ Game.prototype._checkWin = function() {
   if (!rectOverlap(this.player, { x: fl.x, y: fl.y - fl.h, w: fl.w, h: fl.h })) return;
 
   if (this.map.theme === "lava") {
-    // Fin de la lave → lancer la phase 2 comme niveau séparé
+    // Fin de la lave = lancer la phase 2 comme niveau séparé (ça fonctionne pas beaucoup)
     if (this.onPhase2) { this.onPhase2(this.player.score, this.elapsedSec); }
     else                { this._triggerWin(); }
   } else {
@@ -134,7 +132,7 @@ Game.prototype._checkFall = function() {
   p.lives--;
 
   // Checkpoint croisé de campagne : si pas de checkpoint local sur cette map
-  // et qu'on a un checkpoint d'une map précédente → callback pour revenir dessus
+  // et qu'on a un checkpoint d'une map précédente callback pour revenir dessus
   if (!this.hasLocalCheckpoint() && this.campaignSavedCp && this.onNeedPrevMap) {
     this.onNeedPrevMap(this.campaignSavedCp);
     return;

@@ -1,4 +1,4 @@
-// Trampoline – propulse le joueur vers le haut avec une force double
+// Trampoline ça propulse le joueur vers le haut avec une force double
 
 class Trampoline {
   constructor(x, y) {

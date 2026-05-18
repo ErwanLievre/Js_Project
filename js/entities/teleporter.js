@@ -1,4 +1,4 @@
-// Téléporteur – avance de +10% (forêt/glace) ou recule de -10% (lave)
+// Téléporteur = avance de +10% (forêt/glace) ou recule de -10% (lave)
 
 class Teleporter {
   constructor(x, y, forward, levelWidth) {
