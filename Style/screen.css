@@ -1,0 +1,49 @@
+#gameOverScreen, #winScreen {
+  background: var(--bg-main);
+  gap: 22px;
+}
+
+.end-title {
+  font-size: 52px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  text-align: center;
+}
+.end-title.over { color: var(--danger); }
+.end-title.win  { color: #fbbf24; }
+
+/* Stats box */
+.stats-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 280px;
+}
+
+.stat-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 40px;
+}
+.stat-label { color: var(--text-dim); font-size: 14px; }
+.stat-value { font-size: 20px; font-weight: 700; color: var(--text); }
+
+#winRecord {
+  font-size: 17px;
+  font-weight: 700;
+  color: #fbbf24;
+  min-height: 26px;
+  text-align: center;
+}
+
+.end-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
