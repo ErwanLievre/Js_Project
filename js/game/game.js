@@ -38,16 +38,15 @@ class Game {
     this.levelWidth    = level.levelWidth;
 
     const groundY = CONFIG.CANVAS_HEIGHT - 40;
-    // Phase2 : le joueur commence en haut à droite et tombe VERS le plafond (gravité inversée)
+    // Phase2 : le joueur commence en haut à droite et tombe VERS le plafond (gravité inversée) (ça fonctionne pas bien)
     const startX = this.map.theme === "phase2" ? this.levelWidth - 200 : 100;
     const startY = this.map.theme === "phase2" ? 300 : groundY - 48; // phase2 : tombe vers y=0
     this.player   = new Player(startX, startY, this.diff.lives);
     this.cameraX  = this.map.theme === "phase2" ? Math.max(0, this.levelWidth - CONFIG.CANVAS_WIDTH) : 0;
 
-    // Checkpoint de campagne (vient de la map précédente si on en a pas sur celle-ci)
     this.campaignSavedCp = options.campaignSavedCp || null;
 
-    // Callbacks (remplis par menu.js)
+    // Callbacks (remplis par menu.js) (a regarder avec plus de précision car ça beug encore)
     this.onGameOver    = null;
     this.onWin         = null;
     this.onPhase2      = null; // appelé quand le joueur finit la lave
@@ -88,7 +87,7 @@ class Game {
     window.addEventListener("keyup",   this._onKeyUp);
   }
 
-  // Retourne true si le joueur a pris au moins un checkpoint dans ce niveau
+  // Retourne true si le joueur a pris au moins un checkpoint dans ce niveau et comme ça au dessus ça t'envoie ou non a un autre checkpoint
   hasLocalCheckpoint() {
     const startX = this.map.theme === "phase2" ? this.levelWidth - 200 : 100;
     return this.player.cpX !== startX;
@@ -113,7 +112,7 @@ class Game {
   }
 
   _loop(ts = 0) {
-    // Timestep fixe 60Hz – garantit la même vitesse sur tous les PC
+    // Timestep fixe 60Hz = même vitesse sur tous les PC (sinon ça depend des performances du PC et ça peut être injouable sur les PC lents)
     if (!this._lastTs) this._lastTs = ts;
     const elapsed = Math.min(ts - this._lastTs, 50);
     this._lastTs  = ts;

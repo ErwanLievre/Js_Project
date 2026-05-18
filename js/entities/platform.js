@@ -91,7 +91,7 @@ class Platform {
     }
   }
 
-  // Mur bloquant – dessiné selon le thème du monde
+  // Mur bloquant dessiné selon le thème du monde
   _drawWall(ctx, sx, sy) {
     const colors = {
       forest: ["#3E2723","#5D3A1A","#4CAF5033"],

@@ -1,3 +1,4 @@
+// ça fonctionne pas très bien, ça fait des bugs de son parfois, donc je laisse ça de côté pour l'instant
 class SoundManager {
   constructor() {
     this.ctx = null;

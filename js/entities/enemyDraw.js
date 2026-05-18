@@ -124,7 +124,6 @@ Enemy.prototype._drawBird = function(ctx, sx, sy) {
   // Oeil
   ctx.fillStyle = "#FFF";  ctx.fillRect(sx + 31, sy + 5, 6, 6);
   ctx.fillStyle = "#111";  ctx.fillRect(sx + 33, sy + 6, 3, 3);
-  // Pupille brillante
   ctx.fillStyle = "#F44336"; ctx.fillRect(sx + 33, sy + 6, 2, 2);
 
   // Ombre sous les pieds (indique l'altitude)

@@ -1,5 +1,4 @@
-// Gestion de toutes les collisions du jeu (séparé de updater.js pour rester sous 200 lignes)
-
+// Gestion de toutes les collisions du jeu avec les ennemis, powerups, checkpoints, etc.
 Game.prototype._collideEnemies = function() {
   const p = this.player;
   for (const e of this.enemies) {
@@ -72,7 +71,7 @@ Game.prototype._collideSpikes = function() {
   }
 };
 
-// Trampoline : rebond fort quand le joueur tombe dessus
+// Trampoline ça fait un rebond fort quand le joueur tombe ou saute dessus
 Game.prototype._collideTrampolines = function() {
   const p = this.player;
   for (const tr of this.trampolines) {
@@ -86,7 +85,7 @@ Game.prototype._collideTrampolines = function() {
   }
 };
 
-// Téléporteur : propulse le joueur en avant ou en arrière de 10%
+// Téléporteur ça propulse le joueur en avant ou en arrière de 10%
 Game.prototype._collideTeleporters = function() {
   const p = this.player;
   for (const tel of this.teleporters) {
@@ -95,7 +94,7 @@ Game.prototype._collideTeleporters = function() {
       if (tel.teleportPlayer(p)) {
         this.particles.emit(p.x + 16, p.y + 24, ["#00BCD4","#FFF","#E91E63"], 24);
         this.sound.powerup();
-        // Repositionne la caméra immédiatement
+        // Repositionne la cam direct
         this.cameraX = clamp(p.x - CONFIG.CANVAS_WIDTH / 3, 0, Math.max(0, this.levelWidth - CONFIG.CANVAS_WIDTH));
       }
     }

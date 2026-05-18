@@ -1,5 +1,5 @@
 // Spike entity
-// direction "down" = icicles sous les plateformes de glace
+// direction "down" = iciles sous les plateformes de glace
 // direction "up"   = pics sur le sol (obstacles au sol)
 class Spike {
   constructor(x, y, w, theme = "ice", direction = "down") {
