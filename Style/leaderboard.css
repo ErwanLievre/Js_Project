@@ -1,0 +1,53 @@
+#leaderboardScreen {
+  background: var(--bg-main);
+  gap: 22px;
+  padding: 40px 20px;
+}
+
+#leaderboardScreen h2 {
+  font-size: 26px;
+  font-weight: 700;
+  color: #fbbf24;
+  letter-spacing: 2px;
+}
+
+#lbContent {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  min-width: 520px;
+  max-width: 90vw;
+  max-height: 50vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.lb-row {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1fr 1fr;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 7px;
+  background: rgba(255,255,255,0.03);
+  font-size: 13px;
+  align-items: center;
+  transition: background 0.12s;
+}
+.lb-row:hover  { background: rgba(59,130,246,0.08); }
+
+.lb-map   { font-weight: 700; color: var(--text); }
+.lb-diff  { font-weight: 700; }
+.lb-score { color: #fbbf24; font-weight: 700; }
+.lb-time  { color: #67e8f9; }
+.lb-date  { color: var(--text-muted); font-size: 11px; }
+
+.lb-empty {
+  text-align: center;
+  color: var(--text-dim);
+  padding: 28px 0;
+  line-height: 1.8;
+  font-size: 14px;
+}
