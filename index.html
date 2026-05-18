@@ -5,18 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>BlazeRun – Platformer Adventure</title>
 
-  <!-- CSS – chargé dans l'ordre logique -->
-  <link rel="stylesheet" href="css/base.css" />
-  <link rel="stylesheet" href="css/buttons.css" />
-  <link rel="stylesheet" href="css/menu.css" />
-  <link rel="stylesheet" href="css/levelselect.css" />
-  <link rel="stylesheet" href="css/game.css" />
-  <link rel="stylesheet" href="css/screens.css" />
-  <link rel="stylesheet" href="css/leaderboard.css" />
+  <link rel="stylesheet" href="Style/base.css" />
+  <link rel="stylesheet" href="Style//buttons.css" />
+  <link rel="stylesheet" href="Style//menu.css" />
+  <link rel="stylesheet" href="Style//levelselect.css" />
+  <link rel="stylesheet" href="Style//game.css" />
+  <link rel="stylesheet" href="Style//screens.css" />
+  <link rel="stylesheet" href="Style//leaderboard.css" />
 </head>
 <body>
 
-  <!-- ══════════════════════════════════════════════════ MAIN MENU ══ -->
+  <!-- MAIN MENU -->
   <div id="mainMenu" class="screen active">
     <div class="menu-content">
       <h1 class="game-title">BLAZE<span>RUN</span></h1>
@@ -27,7 +26,7 @@
     </div>
   </div>
 
-  <!-- ════════════════════════════════════════════ LEVEL SELECT ══ -->
+  <!-- LEVEL SELECT -->
   <div id="levelSelect" class="screen">
     <h2>CHOISIR UNE MAP</h2>
 
@@ -51,7 +50,7 @@
     </div>
   </div>
 
-  <!-- ══════════════════════════════════════════════════ GAMEPLAY ══ -->
+  <!-- GAMEPLAY -->
   <div id="gameScreen" class="screen">
 
     <!-- HUD -->
@@ -77,7 +76,7 @@
     </div>
   </div>
 
-  <!-- ══════════════════════════════════════════════════ GAME OVER ══ -->
+  <!-- GAME OVER -->
   <div id="gameOverScreen" class="screen">
     <div class="end-title over">💀 GAME OVER</div>
     <div class="stats-box">
@@ -96,7 +95,7 @@
     </div>
   </div>
 
-  <!-- ══════════════════════════════════════════════════════ WIN ══ -->
+  <!-- WIN -->
   <div id="winScreen" class="screen">
     <div class="end-title win">🏆 VICTOIRE !</div>
     <div id="winRecord"></div>
@@ -128,7 +127,7 @@
     </div>
   </div>
 
-  <!-- ══════════════════════════════════════════════ LEADERBOARD ══ -->
+  <!-- LEADERBOARD -->
   <div id="leaderboardScreen" class="screen">
     <h2>🏆 MEILLEURS SCORES</h2>
     <div id="lbContent"></div>
