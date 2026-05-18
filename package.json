@@ -1,0 +1,21 @@
+{
+  "name": "last_repo",
+  "version": "1.0.0",
+  "description": "Jeu de plateforme 2D (inspiré de Mario Bros Wii), développé en JavaScript vanilla (HTML5 Canvas).   Projet B1 – **Niko JUMP 2D** · Équipe : Benjamin Lemoine, Erwan Lièvre, Emilien Pavageau   Durée : 24h · Deadline : 19 mai 2026",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ErwanLievre/Js_Project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ErwanLievre/Js_Project/issues"
+  },
+  "homepage": "https://github.com/ErwanLievre/Js_Project#readme"
+}
