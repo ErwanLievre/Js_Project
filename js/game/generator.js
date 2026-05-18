@@ -14,18 +14,17 @@ function generateLevel(mapConfig, diffKey) {
   const trampolines = [];
   const teleporters = [];
 
-  // ── Phase 2 : niveau spécial gravité inversée ─────────────────────
+  // Phase 2 : niveau spécial gravité inversée 
   if (mapConfig.theme === "phase2") {
     return _generatePhase2(def, diff, H);
   }
 
-  // ── Sol : segments avec trous (trou 🕳️ = espace entre deux segments) ──
+  //Sol : segments avec trous (trou 🕳️ = espace entre deux segments) ──
   for (const [sx, ex] of def.groundSegs) {
     platforms.push(new Platform(sx, groundY, ex - sx, 40, "ground", mapConfig.theme));
   }
 
-  // ── Plateformes prédéfinies ────────────────────────────────────────
-  for (const pd of def.platformDefs) {
+  //Plateformes prédéfinies   for (const pd of def.platformDefs) {
     let type = mapConfig.theme === "ice" ? "ice" : "normal";
     if (pd.movable && diffKey === "medium") type = "moving_h";
     if (pd.movable && diffKey === "hard")   type = "moving_v";
@@ -51,35 +50,35 @@ function generateLevel(mapConfig, diffKey) {
     }
   }
 
-  // ── Murs bloquants (mode Impossible uniquement) ────────────────────
+  // Murs bloquants (mode Impossible uniquement) 
   if (diffKey === "hard") {
     for (const wd of def.wallDefs) {
       platforms.push(new Platform(wd.x, wd.y, 18, wd.h, "wall", mapConfig.theme));
     }
   }
 
-  // ── Trampolines ───────────────────────────────────────────────────
+  // Trampolines 
   for (const td of def.trampolineXs) {
     trampolines.push(new Trampoline(td.x, td.y));
   }
 
-  // ── Téléporteurs (forêt/glace = avance +10%, lave = recule -10%) ──
+  // Téléporteurs (forêt/glace = avance +10%, lave = recule -10%) ──
   for (const tx of def.teleporterXs) {
     const forward = mapConfig.theme !== "lava";
     teleporters.push(new Teleporter(tx, groundY - 64, forward, def.levelWidth));
   }
 
-  // ── Oiseaux 💣 (mode Impossible uniquement) ───────────────────────
+  // Oiseaux 💣 (mode Impossible uniquement)
   if (diffKey === "hard") {
     _spawnBirds(enemies, def.levelWidth, diff);
   }
 
-  // ── Piques au sol (glace uniquement) ─────────────────────────────
+  // Piques au sol (glace uniquement)
   if (mapConfig.theme === "ice") {
     _addGroundSpikes(spikes, groundY, def.levelWidth, diffKey);
   }
 
-  // ── Checkpoints ───────────────────────────────────────────────────
+  // Checkpoints 
   for (const cpX of def.checkpointXs) {
     checkpoints.push(new Checkpoint(cpX, groundY));
   }
@@ -168,7 +167,7 @@ function _spawnEnemies(enemies, pd, plat, diffKey, mapConfig, groundY, platType)
   }
 }
 
-// 6 oiseaux volants répartis sur le niveau (impossible)
+// 6 oiseaux volants répartis sur le niveau (impossible) (ça fonctionne pas bien ça le met un peu partout)
 function _spawnBirds(enemies, levelWidth, diff) {
   const count   = 6;
   const spacing = (levelWidth - 900) / count;
