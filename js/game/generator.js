@@ -24,7 +24,8 @@ function generateLevel(mapConfig, diffKey) {
     platforms.push(new Platform(sx, groundY, ex - sx, 40, "ground", mapConfig.theme));
   }
 
-  //Plateformes prédéfinies   for (const pd of def.platformDefs) {
+  // Plateformes prédéfinies
+  for (const pd of def.platformDefs) {
     let type = mapConfig.theme === "ice" ? "ice" : "normal";
     if (pd.movable && diffKey === "medium") type = "moving_h";
     if (pd.movable && diffKey === "hard")   type = "moving_v";
