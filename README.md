@@ -8,8 +8,15 @@ Durée : 24h · Deadline : 19 mai 2026
 
 ## Lancer le jeu
 
-Ouvre simplement `index.html` dans Chrome, Firefox ou Edge.  
-**Aucun serveur ni installation nécessaire.**
+### Sans serveur (mode direct)
+Ouvre simplement `index.html` dans Chrome, Firefox ou Edge.
+
+### Avec le serveur local (recommandé)
+```bash
+npm install   # une seule fois
+npm start
+```
+Puis ouvre [http://localhost:3000](http://localhost:3000).
 
 ---
 
