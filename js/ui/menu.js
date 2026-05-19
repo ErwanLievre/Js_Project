@@ -64,15 +64,16 @@ class MenuManager {
       this._startCampaignMap(this.selectedMap);
     });
 
-    this._on("btnLevelBack",    "click", () => this._show("mainMenu"));
-    this._on("btnResume",       "click", () => { if (this.currentGame) this.currentGame.resume(); });
-    this._on("btnPauseQuit",    "click", () => this._quitToMenu());
-    this._on("btnRetry",        "click", () => this._retryCurrent());
-    this._on("btnOverQuit",     "click", () => this._quitToMenu());
-    this._on("btnPlayAgain",    "click", () => this._retryCurrent());
-    this._on("btnWinQuit",      "click", () => this._quitToMenu());
-    this._on("btnContinueNext", "click", () => this._continueToNextMap());
-    this._on("btnStopCampaign", "click", () => this._quitToMenu());
+    const quit  = () => this._quitToMenu();
+    const retry = () => this._retryCurrent();
+    [
+      ["btnLevelBack",    () => this._show("mainMenu")],
+      ["btnResume",       () => this.currentGame?.resume()],
+      ["btnPauseQuit",    quit], ["btnRetry",        retry],
+      ["btnOverQuit",     quit], ["btnPlayAgain",    retry],
+      ["btnWinQuit",      quit], ["btnStopCampaign", quit],
+      ["btnContinueNext", () => this._continueToNextMap()],
+    ].forEach(([id, fn]) => this._on(id, "click", fn));
 
     document.querySelector(".diff-btn")?.classList.add("selected");
   }
